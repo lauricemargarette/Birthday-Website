@@ -325,6 +325,101 @@
     color:var(--gold);
     font-weight:500;
   }
+  .cal-cell--clickable{
+    cursor:pointer;
+  }
+  .cal-cell--clickable:hover .num,
+  .cal-cell--clickable:focus-visible .num{
+    color:var(--cream);
+  }
+  .cal-cell--clickable:focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:3px;
+    border-radius:50%;
+  }
+
+  /* ---------- BIRTHDAY POPUP ---------- */
+  .bday-modal{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:6vh 6vw;
+  }
+  .bday-modal[hidden]{ display:none; }
+ 
+  .bday-modal__backdrop{
+    position:absolute;
+    inset:0;
+    background:rgba(12,18,16,0.82);
+    opacity:0;
+    transition:opacity 0.35s ease;
+  }
+  .bday-modal.is-open .bday-modal__backdrop{ opacity:1; }
+ 
+  .bday-modal__card{
+    position:relative;
+    z-index:1;
+    max-width:min(90vw, 420px);
+    background:linear-gradient(180deg, #1c2a20 0%, var(--ink) 100%);
+    border:1px solid var(--gold-soft);
+    border-radius:20px;
+    padding:2.2rem 1.8rem 2rem;
+    text-align:center;
+    box-shadow:0 30px 70px rgba(0,0,0,0.5);
+    opacity:0;
+    transform:translateY(18px) scale(0.96);
+    transition:opacity 0.4s ease, transform 0.4s ease;
+  }
+  .bday-modal.is-open .bday-modal__card{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+ 
+  .bday-modal__close{
+    position:absolute;
+    top:0.6rem;
+    right:0.9rem;
+    background:none;
+    border:none;
+    color:var(--cream);
+    font-size:1.6rem;
+    line-height:1;
+    opacity:0.6;
+    cursor:pointer;
+    padding:0.3rem;
+  }
+  .bday-modal__close:hover,
+  .bday-modal__close:focus-visible{ opacity:1; }
+ 
+  .bday-modal__gif{
+    width:100%;
+    max-height:260px;
+    object-fit:cover;
+    border-radius:12px;
+    border:1px solid var(--gold-soft);
+    display:block;
+    margin-bottom:1.3rem;
+  }
+ 
+  .bday-modal__text{
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:500;
+    color:var(--gold);
+    font-size:clamp(1.3rem, 4vw, 1.8rem);
+    margin:0;
+  }
+  .bday-modal__subtext{
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:500;
+    color:var(--gold);
+    font-size:clamp(1.3rem, 4vw, 1.4rem);
+    margin:0;
+  }
 
   /* ---------- WISH ---------- */
   .wish{
@@ -568,7 +663,7 @@
         <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
       </div>
 
-      <div class="cal-days" role="img" aria-label="Calendar for August, with the 30th circled">
+      <div class="cal-days" role="group" aria-label="Calendar for August">
         <div class="cal-cell empty"></div>
         <div class="cal-cell empty"></div>
         <div class="cal-cell empty"></div>
@@ -609,7 +704,8 @@
         <div class="cal-cell"><span class="num">28</span></div>
         <div class="cal-cell"><span class="num">29</span></div>
 
-        <div class="cal-cell highlight">
+        <div class="cal-cell highlight cal-cell--clickable" id="calThirty" role="button" tabindex="0"
+             aria-haspopup="dialog" aria-label="August 30. Click to open a surprise.">
           <svg class="circle" viewBox="0 0 40 40" aria-hidden="true">
             <path pathLength="1" d="M20 3 C29 3 36 10 36 20 C36 30 29 37 19 36 C10 35 4 29 4 20 C4 11 11 4 20 3 Z" />
           </svg>
@@ -625,6 +721,17 @@
     </div>
   </div>
 </section>
+
+<!-- ================= BIRTHDAY POPUP (triggered by clicking the 30) ================= -->
+<div class="bday-modal" id="bdayModal" role="dialog" aria-modal="true" aria-labelledby="bdayModalText" hidden>
+  <div class="bday-modal__backdrop" id="bdayModalBackdrop"></div>
+  <div class="bday-modal__card">
+    <button class="bday-modal__close" id="bdayModalClose" type="button" aria-label="Close">&times;</button>
+    <img class="bday-modal__gif" id="bdayModalGif" src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MGg5aDlvbXk4Y3dvaWd4cWp3MGJ6bjh0cnYwdWkyczNmM3RuaGI5MCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/UqlLJ4YY8QrPJaHDAj/giphy.gif" alt="Surprise birthday celebration GIF" loading="lazy">
+    <p class="bday-modal__text" id="bdayModalText">It's your birthday!</p>
+    <p class="bday-modal__subtext" id="bdayModalSubtext">Today, I'll treat you whatever you want! ('Wag lang house and lot hehe.)</p>
+  </div>
+</div>
 
 <!-- ================= WISH ================= -->
 <section class="wish">
@@ -732,6 +839,53 @@
     sizeStarfield();
     drawStars();
   }
+
+  // ---- birthday popup on the circled 30 ----
+  var calThirty = document.getElementById('calThirty');
+  var bdayModal = document.getElementById('bdayModal');
+  var bdayBackdrop = document.getElementById('bdayModalBackdrop');
+  var bdayClose = document.getElementById('bdayModalClose');
+  var bdayGif = document.getElementById('bdayModalGif');
+  var BDAY_GIF_URL = 'https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MGg5aDlvbXk4Y3dvaWd4cWp3MGJ6bjh0cnYwdWkyczNmM3RuaGI5MCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/UqlLJ4YY8QrPJaHDAj/giphy.gif';
+  var bdayLastFocused = null;
+ 
+  function openBdayModal(){
+    if (!bdayModal) return;
+    if (bdayGif && !bdayGif.src) bdayGif.src = BDAY_GIF_URL;
+    bdayLastFocused = document.activeElement;
+    bdayModal.hidden = false;
+    // reflow before adding the class so the transition actually plays
+    void bdayModal.offsetWidth;
+    bdayModal.classList.add('is-open');
+    if (bdayClose) bdayClose.focus();
+    document.addEventListener('keydown', onBdayKeydown);
+  }
+ 
+  function closeBdayModal(){
+    if (!bdayModal) return;
+    bdayModal.classList.remove('is-open');
+    document.removeEventListener('keydown', onBdayKeydown);
+    window.setTimeout(function(){
+      bdayModal.hidden = true;
+      if (bdayLastFocused && bdayLastFocused.focus) bdayLastFocused.focus();
+    }, 350);
+  }
+ 
+  function onBdayKeydown(e){
+    if (e.key === 'Escape') closeBdayModal();
+  }
+ 
+  if (calThirty){
+    calThirty.addEventListener('click', openBdayModal);
+    calThirty.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        openBdayModal();
+      }
+    });
+  }
+  if (bdayBackdrop) bdayBackdrop.addEventListener('click', closeBdayModal);
+  if (bdayClose) bdayClose.addEventListener('click', closeBdayModal);
 
   // ---- wish button: gold particle burst ----
   var wishCanvas = document.getElementById('wishCanvas');
