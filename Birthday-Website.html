@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For someone special...</title>
+<meta name="description" content="A birthday page for a Virgo, born August 30.">
+
+<script>
+  const GIRL_NAME = "Faith Adriano";
+  const SIGNED_BY = "Laurice";
+  const WISH_ENDPOINT = "https://formspree.io/f/meaqolol";
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500;1,600&family=Cormorant:wght@500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:      #12181a;   /* near-black night */
+    --forest:   #223428;   /* deep harvest green, dusk */
+    --gold:     #cda545;   /* ripe wheat gold — primary accent */
+    --cream:    #f4efe1;   /* soft cream — light text / bg */
+    --rose:     #c98a76;   /* dusty terracotta — secondary accent */
+    --gold-soft: rgba(205,165,69,0.35);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --label: 'Cormorant', Georgia, serif;
+    --sans:  'Jost', -apple-system, sans-serif;
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-weight:300;
+    overflow-x:hidden;
+  }
+  ::selection{ background:var(--gold-soft); color:var(--ink); }
+
+  a{ color:inherit; }
+  button{ font-family:inherit; }
+
+  :focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:4px;
+  }
+
+  .eyebrow{
+    font-family:var(--label);
+    font-size:0.82rem;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    opacity:0.72;
+  }
+
+  /* ---------- reveal-on-scroll ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity 1s ease, transform 1s ease;
+  }
+  .reveal.visible{ opacity:1; transform:translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .reveal{ opacity:1; transform:none; transition:none; }
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+  }
+
+  /* ================= HERO ================= */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    background:
+      radial-gradient(ellipse 120% 70% at 50% 0%, #1c2c22 0%, var(--ink) 55%, #0c1210 100%);
+    color:var(--cream);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:8vh 6vw 10vh;
+    overflow:hidden;
+  }
+
+  #starfield{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    display:block;
+  }
+
+  .constellation-wrap{
+    position:relative;
+    width:min(78vw, 460px);
+    aspect-ratio:1/1;
+    margin-bottom:2.2rem;
+  }
+
+  #constellation{ width:100%; height:100%; overflow:visible; }
+
+  .const-line{
+    fill:none;
+    stroke:var(--gold);
+    stroke-width:1;
+    stroke-linecap:round;
+    opacity:0.55;
+    stroke-dasharray:6 520;
+    stroke-dashoffset:0;
+    animation:drawLine 3.4s ease forwards;
+  }
+  @keyframes drawLine{
+    from{ stroke-dasharray:0 520; }
+    to{ stroke-dasharray:520 520; }
+  }
+
+  .const-star{
+    fill:var(--cream);
+    opacity:0;
+    animation:starIn 0.9s ease forwards, twinkle 3.4s ease-in-out infinite;
+  }
+  .const-star circle:nth-child(1){ animation-delay:0.1s; }
+  .const-star circle:nth-child(2){ animation-delay:0.3s; }
+  .const-star circle:nth-child(3){ animation-delay:0.5s; }
+  .const-star circle:nth-child(4){ animation-delay:0.7s; }
+  .const-star circle:nth-child(5){ animation-delay:0.9s; }
+  .const-star circle:nth-child(6){ animation-delay:1.1s; }
+  .const-star circle:nth-child(7){ animation-delay:1.3s; }
+  .const-star circle:nth-child(8){ animation-delay:1.5s; }
+  .const-star circle:nth-child(9){ animation-delay:1.7s; }
+  .const-star circle:nth-child(10){ animation-delay:1.9s; }
+  .const-star circle:nth-child(11){ animation-delay:2.1s; }
+  .const-star circle:nth-child(12){ animation-delay:2.3s; }
+  .const-star circle:nth-child(13){ animation-delay:2.5s; }
+  @keyframes starIn{
+    from{ opacity:0; r:0.4; }
+    to{ opacity:1; }
+  }
+  @keyframes twinkle{
+    0%,100%{ opacity:0.55; }
+    50%{ opacity:1; }
+  }
+
+  .hero .eyebrow{ color:var(--gold); margin-bottom:0.6rem; }
+
+  .hero h1{
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(2.6rem, 8vw, 5.4rem);
+    line-height:1.02;
+    margin:0 0 0.9rem;
+    letter-spacing:0.01em;
+  }
+
+  .hero .date{
+    font-family:var(--label);
+    font-size:1.05rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--rose);
+  }
+
+  .hero .date span{ color:var(--gold); }
+
+  .scroll-cue{
+    position:absolute;
+    bottom:6vh;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:0.5rem;
+    color:var(--cream);
+    opacity:0.6;
+    font-family:var(--label);
+    font-size:0.72rem;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+  }
+  @keyframes cueMove{
+    0%,100%{ transform:scaleY(0.6); opacity:0.4; }
+    50%{ transform:scaleY(1); opacity:1; }
+  }
+
+  /* ================= SHARED SECTION ================= */
+  section{
+    padding:min(16vh, 8rem) 6vw;
+    position:relative;
+  }
+  .section-inner{
+    max-width:880px;
+    margin:0 auto;
+  }
+
+  /* ---------- LETTER ---------- */
+  .letter{ background:var(--cream); }
+  .letter .eyebrow{ color:var(--rose); }
+  .letter h2{
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(1.8rem, 4vw, 2.6rem);
+    margin:0.4rem 0 2.2rem;
+  }
+  .letter p{
+    font-size:1.18rem;
+    line-height:1.85;
+    font-weight:300;
+    color:#2b3530;
+    max-width:62ch;
+  }
+  .letter p + p{ margin-top:1.4rem; }
+  .letter .drop{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:3.6rem;
+    line-height:0.7;
+    float:left;
+    padding:0.12em 0.1em 0 0;
+    color:var(--rose);
+  }
+
+  /* ---------- CALENDAR ---------- */
+  .calendar{
+    background:linear-gradient(180deg, var(--forest) 0%, #1a2820 100%);
+    color:var(--cream);
+  }
+  .calendar .eyebrow{ color:var(--gold); text-align:center; }
+  .calendar h2{
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:500;
+    text-align:center;
+    font-size:clamp(1.8rem, 4vw, 2.4rem);
+    margin:0.5rem 0 0.9rem;
+  }
+  .calendar .age-line{
+    text-align:center;
+    font-family:var(--label);
+    letter-spacing:0.24em;
+    text-transform:uppercase;
+    font-size:0.82rem;
+    color:var(--rose);
+    margin-bottom:4rem;
+  }
+
+  .cal-grid-wrap{
+    position:relative;
+    max-width:420px;
+    margin:0 auto;
+  }
+  .cal-penguin{
+    display:block;
+    width:clamp(78px, 22vw, 112px);
+    height:auto;
+    margin:0 auto 1.6rem;
+    position:relative;
+    z-index:2;
+    transform:rotate(-8deg);
+  }
+  .reveal.visible .cal-penguin{
+    animation:penguinGasp 1.3s ease 0.15s 1 backwards;
+  }
+  @keyframes penguinGasp{
+    0%{ transform:rotate(-8deg) scale(0.85); opacity:0; }
+    55%{ transform:rotate(5deg) scale(1.06); opacity:1; }
+    100%{ transform:rotate(-8deg) scale(1); opacity:1; }
+  }
+  .cal-weekdays, .cal-days{
+    position:relative;
+    z-index:1;
+    display:grid;
+    grid-template-columns:repeat(7, 1fr);
+  }
+  .cal-weekdays{ margin-bottom:0.9rem; }
+  .cal-weekdays span{
+    font-family:var(--label);
+    font-size:0.7rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    text-align:center;
+    opacity:0.5;
+  }
+  .cal-days{ row-gap:0.5rem; }
+  .cal-cell{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:44px;
+    font-size:1rem;
+    font-weight:300;
+    opacity:0.82;
+  }
+  .cal-cell.empty{ opacity:0; }
+  .cal-cell .circle{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    overflow:visible;
+  }
+  .cal-cell .circle path{
+    fill:none;
+    stroke:var(--gold);
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-dasharray:1;
+    stroke-dashoffset:1;
+  }
+  .reveal.visible .cal-cell .circle path{
+    animation:drawCircle 1.1s ease forwards 0.4s;
+  }
+  @keyframes drawCircle{ to{ stroke-dashoffset:0; } }
+  .cal-cell.highlight .num{
+    position:relative;
+    z-index:1;
+    color:var(--gold);
+    font-weight:500;
+  }
+
+  /* ---------- WISH ---------- */
+  .wish{
+    background:
+      radial-gradient(ellipse 100% 60% at 50% 100%, #1c2c22 0%, var(--ink) 60%);
+    color:var(--cream);
+    text-align:center;
+    min-height:70vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .wish-inner{ position:relative; width:100%; }
+  .wish .eyebrow{ color:var(--gold); }
+  .wish h2{
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(1.9rem, 4.4vw, 2.8rem);
+    margin:0.5rem 0 2.6rem;
+  }
+
+  #wishCanvas{
+    position:absolute;
+    inset:-40% -20%;
+    width:140%;
+    height:180%;
+    pointer-events:none;
+  }
+
+  .wish-btn, .wish-submit{
+    position:relative;
+    background:transparent;
+    border:1px solid var(--gold);
+    color:var(--cream);
+    padding:1rem 2.6rem;
+    font-family:var(--label);
+    font-size:0.85rem;
+    letter-spacing:0.24em;
+    text-transform:uppercase;
+    border-radius:999px;
+    cursor:pointer;
+    transition:background 0.4s ease, color 0.4s ease, letter-spacing 0.4s ease, opacity 0.4s ease;
+  }
+  .wish-btn:hover, .wish-submit:hover{
+    background:var(--gold);
+    color:var(--ink);
+    letter-spacing:0.3em;
+  }
+  .wish-btn.hide{
+    opacity:0;
+    pointer-events:none;
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+  }
+
+  .wish-form{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:1.2rem;
+    max-width:440px;
+    margin:0 auto;
+    opacity:0;
+    max-height:0;
+    overflow:hidden;
+    transition:opacity 0.6s ease;
+  }
+  .wish-form.show{
+    opacity:1;
+    max-height:400px;
+    overflow:visible;
+  }
+  .wish-form textarea{
+    width:100%;
+    min-height:110px;
+    background:transparent;
+    border:1px solid var(--gold-soft);
+    border-radius:16px;
+    padding:0.95rem 1.15rem;
+    color:var(--cream);
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:1.1rem;
+    line-height:1.55;
+    resize:vertical;
+  }
+  .wish-form textarea::placeholder{
+    color:rgba(244,239,225,0.4);
+    font-style:italic;
+  }
+  .wish-form textarea:focus{
+    outline:none;
+    border-color:var(--gold);
+  }
+
+  .wish-note{
+    margin-top:1.6rem;
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:1.15rem;
+    color:var(--gold);
+    min-height:1.6em;
+    opacity:0;
+    transition:opacity 0.8s ease;
+  }
+  .wish-note.show{ opacity:1; }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--cream);
+    text-align:center;
+    padding:4rem 6vw 5rem;
+  }
+  footer .rule{
+    width:64px;
+    height:1px;
+    background:var(--gold);
+    margin:0 auto 1.4rem;
+  }
+  footer p{
+    font-family:var(--label);
+    font-style:italic;
+    font-size:1rem;
+    letter-spacing:0.04em;
+    color:#5b655c;
+    margin:0;
+  }
+  footer .small{
+    margin-top:0.6rem;
+    font-family:var(--sans);
+    font-style:normal;
+    font-size:0.72rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    opacity:0.45;
+  }
+
+  @media (max-width:560px){
+    section{ padding:5rem 7vw; }
+    .letter .drop{ font-size:3rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <canvas id="starfield" aria-hidden="true"></canvas>
+
+  <p class="eyebrow">A birthday website for someone special</p>
+
+  <div class="constellation-wrap">
+    <svg id="constellation" viewBox="0 0 300 300" aria-hidden="true">
+      <!-- simplified, stylised Virgo line-figure -->
+      <polyline class="const-line"
+        points="40,60 90,40 150,55 190,35 235,70 210,120 250,150 220,210 170,230 130,190 90,210 60,150 90,110 40,60" />
+      <g class="const-star">
+        <circle cx="40" cy="60" r="2.6"/>
+        <circle cx="90" cy="40" r="1.8"/>
+        <circle cx="150" cy="55" r="2.2"/>
+        <circle cx="190" cy="35" r="1.6"/>
+        <circle cx="235" cy="70" r="2.8"/>
+        <circle cx="210" cy="120" r="1.8"/>
+        <circle cx="250" cy="150" r="2.4"/>
+        <circle cx="220" cy="210" r="1.8"/>
+        <circle cx="170" cy="230" r="2.6"/>
+        <circle cx="130" cy="190" r="1.6"/>
+        <circle cx="90" cy="210" r="2.2"/>
+        <circle cx="60" cy="150" r="1.8"/>
+        <circle cx="90" cy="110" r="3.2"/>
+      </g>
+    </svg>
+  </div>
+
+  <h1 id="heroName">Faith Adriano</h1>
+  <p class="date">August 30, 2026</p>
+
+  <div class="scroll-cue">scroll</div>
+</section>
+
+<!-- ================= LETTER ================= -->
+<section class="letter">
+  <div class="section-inner reveal">
+    <p class="eyebrow">for you</p>
+    <h2>A short letter, on the year you've just finished.</h2>
+    <p><span class="drop">T</span>oday is the beginning of a new chapter in your life, and I'm glad that you've made it through another year even if it wasn't easy. You deserve all the genuine happiness, meaningful experiences, and people who truly value and appreciate you.</p>
+    <p>We've known each other for years, but only a few months having a great time together (well, at least for me  it's great and fun HAHAHAHA).We're not even in the same place, but somehow, our friendship has become something I genuinely cherish and value. We may be very different in many ways, I hope you won't get tired of me beacuse I won't get tired of annoying you hehe.</p>
+    <p>As you turn 21, I hope you continue to embrace and grow into the person you want to become. May you always have the courage to pursue your dreams, the wisdom to choose what brings you peace, and the strength to overcome any challenges that come your way.</p>
+    <p>I might not have the chance to treat you today and celebrate your birthday with you, I hope this small gesture of mine will somehow make it up to you. I might not be perfect, most present, always available, and a good friend, but I'm always here for you (through online and long distance), hoping and rooting for all the great things about you and I hope you know that. Love you a lot!</p>
+    <p>Happy 21st birthday! Enjoy your special day! May the life you're living be the life you're dreaming of.</p>
+  </div>
+</section>
+
+<!-- ================= CALENDAR ================= -->
+<section class="calendar">
+  <div class="section-inner">
+    <p class="eyebrow">the day encircled</p>
+    <h2>One date, worth celebrating hundred times</h2>
+    <p class="age-line">This calendar represents a special day!</p>
+
+    <div class="cal-grid-wrap reveal">
+      <svg class="cal-penguin" viewBox="0 0 160 190" aria-hidden="true">
+        <!-- body -->
+        <path d="M80 22 C50 22 33 56 33 96 C33 142 55 168 80 168 C105 168 127 142 127 96 C127 56 110 22 80 22 Z"
+          fill="rgba(244,239,225,0.06)" stroke="var(--gold)" stroke-width="1.6"/>
+        <!-- belly -->
+        <path d="M80 58 C63 58 51 80 51 106 C51 136 64 154 80 154 C96 154 109 136 109 106 C109 80 97 58 80 58 Z"
+          fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.45"/>
+        <!-- resting flipper -->
+        <path d="M33 82 C17 88 9 108 15 124" fill="none" stroke="var(--gold)" stroke-width="1.6" stroke-linecap="round"/>
+        <!-- raised, delighted flipper -->
+        <path d="M127 78 C142 62 151 46 148 30" fill="none" stroke="var(--gold)" stroke-width="1.6" stroke-linecap="round"/>
+        <!-- feet -->
+        <path d="M61 166 L52 179 L69 175 Z" fill="rgba(201,138,118,0.5)" stroke="var(--gold)" stroke-width="1"/>
+        <path d="M99 166 L108 179 L91 175 Z" fill="rgba(201,138,118,0.5)" stroke="var(--gold)" stroke-width="1"/>
+        <!-- eyebrows, raised in surprise -->
+        <path d="M49 55 Q62 46 74 55" fill="none" stroke="var(--gold)" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M86 55 Q98 46 111 55" fill="none" stroke="var(--gold)" stroke-width="1.4" stroke-linecap="round"/>
+        <!-- wide eyes -->
+        <circle cx="62" cy="72" r="12.5" fill="rgba(244,239,225,0.92)" stroke="var(--gold)" stroke-width="1"/>
+        <circle cx="98" cy="72" r="12.5" fill="rgba(244,239,225,0.92)" stroke="var(--gold)" stroke-width="1"/>
+        <!-- pupils, cast down toward the circled date -->
+        <circle cx="58" cy="77" r="4.2" fill="var(--ink)"/>
+        <circle cx="94" cy="77" r="4.2" fill="var(--ink)"/>
+        <!-- rosy, happy cheeks -->
+        <ellipse cx="48" cy="93" rx="8" ry="5" fill="rgba(201,138,118,0.4)"/>
+        <ellipse cx="112" cy="93" rx="8" ry="5" fill="rgba(201,138,118,0.4)"/>
+        <!-- open beak, curled up at the corners into a smile -->
+        <path d="M72 89 Q80 84 88 89 Q88 100 80 105 Q72 100 72 89 Z"
+          fill="rgba(201,138,118,0.55)" stroke="var(--gold)" stroke-width="1"/>
+        <path d="M72 92 Q68 96 71 100 M88 92 Q92 96 89 100"
+          fill="none" stroke="var(--gold)" stroke-width="1.2" stroke-linecap="round" opacity="0.8"/>
+        <!-- little celebratory sparkle marks -->
+        <path d="M27 28 L18 18 M133 28 L142 18 M80 6 L80 -5"
+          fill="none" stroke="var(--gold)" stroke-width="1.4" stroke-linecap="round" opacity="0.7"/>
+      </svg>
+
+      <div class="cal-weekdays" aria-hidden="true">
+        <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+      </div>
+
+      <div class="cal-days" role="img" aria-label="Calendar for August, with the 30th circled">
+        <div class="cal-cell empty"></div>
+        <div class="cal-cell empty"></div>
+        <div class="cal-cell empty"></div>
+        <div class="cal-cell empty"></div>
+        <div class="cal-cell empty"></div>
+        <div class="cal-cell empty"></div>
+        <div class="cal-cell"><span class="num">1</span></div>
+
+        <div class="cal-cell"><span class="num">2</span></div>
+        <div class="cal-cell"><span class="num">3</span></div>
+        <div class="cal-cell"><span class="num">4</span></div>
+        <div class="cal-cell"><span class="num">5</span></div>
+        <div class="cal-cell"><span class="num">6</span></div>
+        <div class="cal-cell"><span class="num">7</span></div>
+        <div class="cal-cell"><span class="num">8</span></div>
+
+        <div class="cal-cell"><span class="num">9</span></div>
+        <div class="cal-cell"><span class="num">10</span></div>
+        <div class="cal-cell"><span class="num">11</span></div>
+        <div class="cal-cell"><span class="num">12</span></div>
+        <div class="cal-cell"><span class="num">13</span></div>
+        <div class="cal-cell"><span class="num">14</span></div>
+        <div class="cal-cell"><span class="num">15</span></div>
+
+        <div class="cal-cell"><span class="num">16</span></div>
+        <div class="cal-cell"><span class="num">17</span></div>
+        <div class="cal-cell"><span class="num">18</span></div>
+        <div class="cal-cell"><span class="num">19</span></div>
+        <div class="cal-cell"><span class="num">20</span></div>
+        <div class="cal-cell"><span class="num">21</span></div>
+        <div class="cal-cell"><span class="num">22</span></div>
+
+        <div class="cal-cell"><span class="num">23</span></div>
+        <div class="cal-cell"><span class="num">24</span></div>
+        <div class="cal-cell"><span class="num">25</span></div>
+        <div class="cal-cell"><span class="num">26</span></div>
+        <div class="cal-cell"><span class="num">27</span></div>
+        <div class="cal-cell"><span class="num">28</span></div>
+        <div class="cal-cell"><span class="num">29</span></div>
+
+        <div class="cal-cell highlight">
+          <svg class="circle" viewBox="0 0 40 40" aria-hidden="true">
+            <path pathLength="1" d="M20 3 C29 3 36 10 36 20 C36 30 29 37 19 36 C10 35 4 29 4 20 C4 11 11 4 20 3 Z" />
+          </svg>
+          <span class="num">30</span>
+        </div>
+        <div class="cal-cell"><span class="num">31</span></div>
+        <div class="cal-cell empty"></div>
+        <div class="cal-cell empty"></div>
+        <div class="cal-cell empty"></div>
+        <div class="cal-cell empty"></div>
+        <div class="cal-cell empty"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WISH ================= -->
+<section class="wish">
+  <canvas id="wishCanvas" aria-hidden="true"></canvas>
+  <div class="wish-inner section-inner reveal">
+    <p class="eyebrow">before you go</p>
+    <h2>Make a wish. It's still your day.</h2>
+
+    <button class="wish-btn" id="wishBtn" type="button">Make a wish</button>
+
+    <form class="wish-form" id="wishForm" novalidate>
+      <textarea id="wishText" placeholder="Write it here — as long or short as you like." aria-label="Your wish"></textarea>
+      <button class="wish-submit" type="submit">Send it off</button>
+    </form>
+
+    <p class="wish-note" id="wishNote" role="status">Whatever it was — I hope it finds you.</p>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="rule"></div>
+  <p id="footerSig">from ${SIGNED_BY}, someone who's glad you're existing</p>
+  <p id="footer"><br>© 2026. LMDP. All rights reserved.</p>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---- personalize ----
+  var nameEl = document.getElementById('heroName');
+  if (nameEl) nameEl.textContent = GIRL_NAME;
+  document.title = GIRL_NAME + " — happy birthday";
+  var sigEl = document.getElementById('footerSig');
+  if (sigEl) sigEl.textContent = "from " + SIGNED_BY + ", someone who's glad you're existing";
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- scroll reveal ----
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && !reduceMotion){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('visible'); });
+  }
+
+  // ---- starfield background in hero ----
+  var starCanvas = document.getElementById('starfield');
+  if (starCanvas){
+    var sctx = starCanvas.getContext('2d');
+    var stars = [];
+    var heroSection = starCanvas.parentElement;
+
+    function sizeStarfield(){
+      var rect = heroSection.getBoundingClientRect();
+      starCanvas.width = rect.width * devicePixelRatio;
+      starCanvas.height = rect.height * devicePixelRatio;
+      starCanvas.style.width = rect.width + 'px';
+      starCanvas.style.height = rect.height + 'px';
+      sctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+      buildStars(rect.width, rect.height);
+    }
+
+    function buildStars(w, h){
+      var count = Math.floor((w*h) / 9000);
+      stars = [];
+      for (var i=0; i<count; i++){
+        stars.push({
+          x: Math.random()*w,
+          y: Math.random()*h,
+          r: Math.random()*1.1 + 0.3,
+          phase: Math.random()*Math.PI*2,
+          speed: 0.006 + Math.random()*0.012
+        });
+      }
+    }
+
+    var t = 0;
+    function drawStars(){
+      var w = starCanvas.width / devicePixelRatio;
+      var h = starCanvas.height / devicePixelRatio;
+      sctx.clearRect(0,0,w,h);
+      for (var i=0; i<stars.length; i++){
+        var s = stars[i];
+        var tw = 0.4 + 0.6 * Math.abs(Math.sin(t*s.speed*40 + s.phase));
+        sctx.beginPath();
+        sctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+        sctx.fillStyle = 'rgba(244,239,225,' + (0.25 + tw*0.55).toFixed(3) + ')';
+        sctx.fill();
+      }
+      t++;
+      if (!reduceMotion) requestAnimationFrame(drawStars);
+    }
+
+    window.addEventListener('resize', sizeStarfield);
+    sizeStarfield();
+    drawStars();
+  }
+
+  // ---- wish button: gold particle burst ----
+  var wishCanvas = document.getElementById('wishCanvas');
+  var wishBtn = document.getElementById('wishBtn');
+  var wishForm = document.getElementById('wishForm');
+  var wishText = document.getElementById('wishText');
+  var wishNote = document.getElementById('wishNote');
+  var wishSection = document.querySelector('.wish');
+  var particles = [];
+  var burstRunning = false;
+  var spawnBurst = null; // assigned below once the canvas is ready
+
+  function sendWishQuietly(text){
+    if (!WISH_ENDPOINT) return; // not configured — see setup note below
+    fetch(WISH_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        wish: text,
+        from: GIRL_NAME,
+        occasion: 'birthday wish, ' + new Date().toISOString()
+      })
+    }).catch(function(){
+      // Sent from her side either way — she should never see a failure.
+      // If this keeps failing, check WISH_ENDPOINT is a real Formspree URL.
+    });
+  }
+
+  if (wishBtn && wishForm && wishText){
+    wishBtn.addEventListener('click', function(){
+      wishBtn.classList.add('hide');
+      wishForm.classList.add('show');
+      window.setTimeout(function(){ wishText.focus(); }, 300);
+    });
+
+    wishForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      var text = wishText.value.trim();
+      sendWishQuietly(text);
+      wishForm.classList.remove('show');
+      if (spawnBurst) spawnBurst();
+      wishNote.classList.remove('show');
+      void wishNote.offsetWidth;
+      wishNote.classList.add('show');
+    });
+  }
+
+  if (wishCanvas && wishBtn){
+    var wctx = wishCanvas.getContext('2d');
+
+    function sizeWishCanvas(){
+      var rect = wishSection.getBoundingClientRect();
+      wishCanvas.width = rect.width * 1.4 * devicePixelRatio;
+      wishCanvas.height = rect.height * 1.8 * devicePixelRatio;
+      wctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+    }
+    window.addEventListener('resize', sizeWishCanvas);
+    sizeWishCanvas();
+
+    var palette = ['#cda545', '#f4efe1', '#c98a76'];
+
+    spawnBurst = function(){
+      var w = wishCanvas.width / devicePixelRatio;
+      var h = wishCanvas.height / devicePixelRatio;
+      var cx = w/2, cy = h/2;
+      var n = reduceMotion ? 0 : 70;
+      for (var i=0; i<n; i++){
+        var angle = Math.random()*Math.PI*2;
+        var speed = 1 + Math.random()*3.4;
+        particles.push({
+          x: cx, y: cy,
+          vx: Math.cos(angle)*speed,
+          vy: Math.sin(angle)*speed - 1.2,
+          r: 1.2 + Math.random()*2.2,
+          life: 1,
+          decay: 0.006 + Math.random()*0.01,
+          color: palette[i % palette.length]
+        });
+      }
+      if (!burstRunning) { burstRunning = true; requestAnimationFrame(stepBurst); }
+    }
+
+    function stepBurst(){
+      var w = wishCanvas.width / devicePixelRatio;
+      var h = wishCanvas.height / devicePixelRatio;
+      wctx.clearRect(0,0,w,h);
+      var alive = false;
+      for (var i=0; i<particles.length; i++){
+        var p = particles[i];
+        if (p.life <= 0) continue;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.02;
+        p.life -= p.decay;
+        if (p.life > 0){
+          alive = true;
+          wctx.beginPath();
+          wctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+          wctx.fillStyle = p.color;
+          wctx.globalAlpha = Math.max(p.life, 0);
+          wctx.fill();
+          wctx.globalAlpha = 1;
+        }
+      }
+      particles = particles.filter(function(p){ return p.life > 0; });
+      if (alive){
+        requestAnimationFrame(stepBurst);
+      } else {
+        burstRunning = false;
+      }
+    }
+  }
+
+})();
+</script>
+
+</body>
+</html>
